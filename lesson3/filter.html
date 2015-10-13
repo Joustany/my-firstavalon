@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>filter</title>
+    <script src="avalon.js"></script>
+    <script>
+        avalon.filters.parseSymbol = function(str){
+            return{
+                '元': '元',
+                'USD': '美元',
+                'HKD': '港元',
+                'MOP': '澳币',
+                'SGD': '新加坡元',
+                'TWD': '台币'
+            }[str];
+        };
+
+        avalon.ready(function() {
+            avalon.define({
+                $id: "test",
+                cont: "<b>没有传参，用于将文本绑定转换为HTML绑定</b>",
+                word1: "avalong learning 大写化",
+                word2: "Felix LU 小写化",
+                string: "对长字符串进行截短",
+                variable: "webkit-box-flex 驼峰化处理",
+                string2: "<b>对类似于HTML格式的字符串进行转义</b>",
+                money: 1200536.25355,
+                num: 134420.56777,
+                custom: "<i>这是一段自定义的字符串 This is a custom string</i>"
+            });
+            avalon.scan();
+        });
+    </script>
+</head>
+<body>
+    <div ms-controller="test">
+        <div>{{cont|html}}</div>
+        <div>{{word1|uppercase}}</div>
+        <div>{{word2|lowercase}}</div>
+        <div>{{variable|camelize}}</div>
+        <div>{{string2|escape}}</div>
+        <div>{{money|currency('$')}}</div>
+        <div>{{num|number(3)}}</div>
+        <div>{{num|number(2,'.')}}</div>
+        <div>{{num|number(2,'.',',')}}</div>
+        <br/>
+        <div>{{new Date | date("yyyy MM dd HH:mm:ss a")}}</div>
+        <div>{{1373021259229 | date("yyyy-MM-dd HH:mm:ss a")}}</div>
+        <div>{{custom|html|uppercase}}</div>
+        <div>{{'USD'|parseSymbol}}</div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>interpolation-express</title>
+    <script src="avalon.js"></script>
+    <style>
+        .ms-controller{
+            visibility: hidden;
+        }
+    </style>
+    <script>
+        avalon.config({
+            interpolate: ["[[","]]"]
+        });+
+
+        avalon.ready(function() {
+            avalon.define({
+                $id: "test",
+                word: "Hello Avalon",
+                suffix: "duplex",
+                img: "<img src=\"https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superplus/img/logo_white_ee663702.png\">"
+            });
+            avalon.scan();
+        });
+    </script>
+</head>
+<body>
+    <div ms-controller="test" class="ms-controller">
+        <h1 ms-[[suffix|html]]="aaa">[[word]]!!!!!</h1>
+        [[img|html]]
+    </div>
+</body>
+</html>

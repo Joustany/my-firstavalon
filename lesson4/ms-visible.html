@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ms-visible</title>
+    <style>
+        div div{
+            width: 260px;
+            height: 100px;
+        }
+        
+        div.d1{
+            background: #ff0000;
+        }
+
+        div.d2{
+            background: #008000;
+        }
+
+        div.d3{
+            background: #0000ff;
+        }
+
+    </style>
+    <script src="avalon.js"></script>
+    <script>
+        avalon.ready(function(){
+            var vm = avalon.define({
+                $id: "test",
+                currentIndex: 1,
+                isShowBox: false,
+                toggle: function(index){
+                    vm.currentIndex = index;
+                }
+            });
+
+            setTimeout(function(){
+                vm.isShowBox = true;
+            },3000);
+
+            avalon.scan();
+        });
+    </script>
+</head>
+<body ms-controller="test">
+    <div ms-visible="isShowBox">
+        <button ms-click="toggle(1)">色块[red]</button>
+        <button ms-click="toggle(2)">色块[green]</button>
+        <button ms-click="toggle(3)">色块[blue]</button>
+        <div class="d1" ms-visible="currentIndex===1"></div>
+        <div class="d2" ms-visible="currentIndex===2"></div>
+        <div class="d3" ms-visible="currentIndex===3"></div>
+    </div>
+</body>
+</html>
